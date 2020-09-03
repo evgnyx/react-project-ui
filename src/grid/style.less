@@ -1,0 +1,42 @@
+.ui-grid {
+  display: flex;
+
+  &.ai {
+    &-center {
+      align-items: center;
+    }
+    &-start {
+      align-items: flex-start;
+    }
+  }
+
+  &.jc-end {
+    justify-content: flex-end;
+  }
+
+  &.item {
+    flex: 0 0 auto;
+
+    .middle &, &.middle {
+      align-items: center;
+    }
+
+    .spaced & {
+      margin-left: -15px;
+      padding: 0 15px;
+
+      &:first-child {
+        margin-left: 0;
+        padding-left: 0;
+      }
+
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+  }
+
+  &.fluid {
+    flex: 1;
+  }
+}

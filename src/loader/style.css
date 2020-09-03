@@ -1,0 +1,9 @@
+@base: 16;
+@s: 22;
+
+.ui-loader {
+  display: inline-block;
+  width: unit(@s/@base, em);
+  height: unit(@s/@base, em);
+  fill: currentColor;
+}

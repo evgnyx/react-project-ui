@@ -1,0 +1,7 @@
+@fs: 20;
+@base: 16;
+
+.text {
+  // height: 10/2px;
+  font-size: unit(@fs/@base, em);
+}
