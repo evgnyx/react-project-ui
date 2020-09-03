@@ -1,13 +1,26 @@
 {
-  "name": "test.rollup",
-  "version": "1.0.0",
+  "name": "react-project-ui",
+  "version": "0.1.0",
   "description": "",
-  "files": [
-    "dist"
-  ],
+  "keywords": [],
+  "author": "evgnyx",
+  "license": "MIT",
+
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evgnyx/react-project-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/evgnyx/react-project-ui/issues"
+  },
+  "homepage": "https://github.com/evgnyx/react-project-ui#readme",
+
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
   "types": "dist/types/**/*",
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clear": "rimraf dist",
@@ -16,9 +29,6 @@
     "types": "tsc --emitDeclarationOnly",
     "start": "rollup -c -w"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "browserslist": [
     "defaults"
   ],
