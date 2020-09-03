@@ -27,7 +27,10 @@
     "build": "npm run clear && rollup -c",
     "css": "postcss src/**/*.less --watch --dir dist/css --base src --ext css",
     "types": "tsc --emitDeclarationOnly",
-    "start": "rollup -c -w"
+    "start": "rollup -c -w",
+    "prepare": "npm run build",
+    "version": "git add -A src",
+    "postversion": "git push && git push --tags"
   },
   "browserslist": [
     "defaults"
