@@ -95,7 +95,7 @@ function Collapse({
       ref={ elementRef }
       style={{ height: state.height }}
     >
-      <div ref={ contentRef }>
+      <div className={ join(styles.uiCollapseContent) } ref={ contentRef }>
         { children }
       </div>
     </div>
