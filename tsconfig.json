@@ -17,7 +17,8 @@
     "importHelpers": true,
     "declaration": true,
     "emitDeclarationOnly": true,
-    "declarationDir": "dist/types"
+    // "declarationDir": "dist/types",
+    "outFile": "index.d.ts",
   },
   "include": [
     "src/**/*"

@@ -64,3 +64,5 @@ typings/
 .next
 .vscode
 dist/
+index.d.ts
+
