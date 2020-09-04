@@ -24,7 +24,7 @@
   ],
   "exclude": [
     "node_modules",
-    "dist",
-    "develop"
+    "dist/",
+    "develop/",
   ]
 }

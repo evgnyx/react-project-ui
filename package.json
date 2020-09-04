@@ -22,7 +22,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clear": "rimraf dist",
-    "build": "npm run clear && rollup -c",
+    "build": "npm run clear && rollup -c && npm run types",
     "css": "postcss src/**/*.less --watch --dir dist/css --base src --ext css",
     "types": "tsc --emitDeclarationOnly",
     "start": "rollup -c -w",
