@@ -14,14 +14,14 @@ const DEFAULTS = {
 
 type Callback = (...args: any[]) => any
 
-interface CollapseProps {
+interface CollapseProps extends React.PropsWithChildren<{
   className?: string,
   isOpen: boolean,
   onBeforeOpen?: Callback
   onAfterOpen?: Callback
   onBeforeClose?: Callback
   onAfterClose?: Callback
-}
+}> {}
 
 interface StateParams extends React.CSSProperties {
   dataCollapse: string,
@@ -35,7 +35,7 @@ function Collapse({
   onBeforeClose,
   onAfterClose,
   children
-}: React.PropsWithChildren<CollapseProps>, ref: any) {
+}: CollapseProps, ref: any) {
   const styles = CONFIG.collapse || {}
 
   const [state, setState] = React.useState<StateParams>({} as StateParams)
@@ -95,7 +95,10 @@ function Collapse({
       ref={ elementRef }
       style={{ height: state.height }}
     >
-      <div className={ join(styles.uiCollapseContent) } ref={ contentRef }>
+      <div
+        className={ join(styles.uiCollapseContent) }
+        ref={ contentRef }
+      >
         { children }
       </div>
     </div>
