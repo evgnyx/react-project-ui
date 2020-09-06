@@ -1,3 +1,5 @@
+import { Config } from './types'
+
 const CONFIG: Config = {}
 
 export function configure(data: Config) {

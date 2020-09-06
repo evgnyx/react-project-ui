@@ -1,3 +1,5 @@
+import { Fn } from '../types'
+
 function enableScroll() {
   document.documentElement.style.height = ''
   document.documentElement.style.overflow = ''

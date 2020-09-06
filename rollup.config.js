@@ -46,8 +46,8 @@ export default [
       }),
 		],
 		output: [
-			{ dir: 'dist/cjs', format: 'cjs' },
-			{ dir: 'dist/es', format: 'es' },
+			{ dir: 'dist', format: 'cjs' },
+			// { dir: 'dist/es', format: 'es' },
 		],
 	},
   // {

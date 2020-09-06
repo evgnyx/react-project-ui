@@ -1,3 +1,5 @@
+import { Fn } from '../types'
+
 function disableScroll() {
   const { style } = document.body
   style.top = `-${ window.pageYOffset }px`

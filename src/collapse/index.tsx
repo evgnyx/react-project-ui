@@ -2,6 +2,7 @@ import * as React from 'react'
 import { join } from '../tools'
 import listen from '../utils/listen'
 import CONFIG from '../config'
+import { Fn } from '../types'
 
 
 const DEFAULTS = {
@@ -12,19 +13,18 @@ const DEFAULTS = {
   isClosing: 'closing',
 }
 
-type Callback = (...args: any[]) => any
-
 interface CollapseProps extends React.PropsWithChildren<{
-  className?: string,
-  isOpen: boolean,
-  onBeforeOpen?: Callback
-  onAfterOpen?: Callback
-  onBeforeClose?: Callback
-  onAfterClose?: Callback
+  className?: string
+  isOpen: boolean
+  onBeforeOpen?: Fn
+  onAfterOpen?: Fn
+  onBeforeClose?: Fn
+  onAfterClose?: Fn
 }> {}
 
 interface StateParams extends React.CSSProperties {
-  dataCollapse: string,
+  dataCollapse: string
+  ready: boolean
 }
 
 function Collapse({
@@ -38,7 +38,11 @@ function Collapse({
 }: CollapseProps, ref: any) {
   const styles = CONFIG.collapse || {}
 
-  const [state, setState] = React.useState<StateParams>({} as StateParams)
+  const [state, setState] = React.useState<StateParams>({
+    height: isOpen ? 'auto' : 0,
+    dataCollapse: isOpen ? DEFAULTS.isOpen : DEFAULTS.isClosed,
+    ready: false,
+  })
 
   const elementRef = React.useRef<HTMLDivElement>(null)
   const contentRef = React.useRef<HTMLDivElement>(null)
@@ -52,21 +56,18 @@ function Collapse({
       setState({
         height: _isOpen ? 'auto' : elementRef.current!.clientHeight,
         dataCollapse: _isOpen ? DEFAULTS.isOpen : DEFAULTS.isClosed,
+        ready: true,
       })
       if (_isOpen && onAfterOpen) onAfterOpen()
       if (!_isOpen && onAfterClose) onAfterClose()
     }
   }, [])
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     if (!elementRef.current || !contentRef.current) return
 
-    if (!state.dataCollapse) {
-      setState({
-        height: isOpen ? 'auto' : 0,
-        dataCollapse: isOpen ? DEFAULTS.isOpen : DEFAULTS.isClosed,
-      })
-      return
+    if (!state.ready) {
+      return setState((s) => ({ ...s, ready: true }))
     }
 
     ;(async () => {
@@ -76,8 +77,10 @@ function Collapse({
       setState({
         height: contentRef.current!.clientHeight,
         dataCollapse: isOpen ? DEFAULTS.isOpening : DEFAULTS.isClosing,
+        ready: true,
       })
-      if (!isOpen) setTimeout(() => setState((s) => ({ ...s, height: 0 })), 0)
+
+      if (!isOpen) setTimeout(() => setState((s) => ({ ...s, height: 0 })), 10)
     })()
 
     return listen(elementRef.current, ['transitionstart', 'transitionend'], handleTransition)

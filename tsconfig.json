@@ -5,7 +5,7 @@
     "sourceMap": false,
     "module": "esnext",
     "target": "es5",
-    "jsx": "react",
+    "jsx": "preserve",
     "allowJs": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -17,11 +17,10 @@
     "importHelpers": true,
     "declaration": true,
     "emitDeclarationOnly": true,
-    "declarationDir": "dist/types",
-    // "outFile": "index.d.ts",
+    "declarationDir": "dist",
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
   ],
   "exclude": [
     "node_modules",

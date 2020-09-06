@@ -1,6 +1,6 @@
 export { configure } from './config'
-// export { default as Button } from './button'
 export { default as Collapse } from './collapse'
+// export { default as Button } from './button'
 // export { default as Fade } from './fade'
 // export { default as Sticky } from './sticky'
 export * from './utils'

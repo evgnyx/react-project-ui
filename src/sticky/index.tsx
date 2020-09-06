@@ -1,5 +1,5 @@
 import * as React from 'react'
-
+import { Fn } from '../types'
 
 const DIRECTION = {
   top: 'top',
