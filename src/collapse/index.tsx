@@ -1,11 +1,11 @@
 import * as React from 'react'
-import { join } from '../tools'
+import join from '../utils/join'
 import listen from '../utils/listen'
 import CONFIG from '../config'
 import { Fn } from '../types'
 
 
-const DEFAULTS = {
+const Settings = {
   class: 'ui-collapse',
   isOpen: 'open',
   isClosed: 'closed',
@@ -40,7 +40,7 @@ function Collapse({
 
   const [state, setState] = React.useState<StateParams>({
     height: isOpen ? 'auto' : 0,
-    dataCollapse: isOpen ? DEFAULTS.isOpen : DEFAULTS.isClosed,
+    dataCollapse: isOpen ? Settings.isOpen : Settings.isClosed,
     ready: false,
   })
 
@@ -55,7 +55,7 @@ function Collapse({
       const _isOpen = elementRef.current!.clientHeight === contentRef.current!.clientHeight
       setState({
         height: _isOpen ? 'auto' : elementRef.current!.clientHeight,
-        dataCollapse: _isOpen ? DEFAULTS.isOpen : DEFAULTS.isClosed,
+        dataCollapse: _isOpen ? Settings.isOpen : Settings.isClosed,
         ready: true,
       })
       if (_isOpen && onAfterOpen) onAfterOpen()
@@ -76,7 +76,7 @@ function Collapse({
 
       setState({
         height: contentRef.current!.clientHeight,
-        dataCollapse: isOpen ? DEFAULTS.isOpening : DEFAULTS.isClosing,
+        dataCollapse: isOpen ? Settings.isOpening : Settings.isClosing,
         ready: true,
       })
 
@@ -90,7 +90,7 @@ function Collapse({
     <div
       className={
         join(
-          styles.uiCollapse || DEFAULTS.class,
+          styles.uiCollapse || Settings.class,
           className
         )
       }

@@ -1,4 +1,4 @@
-export function join(...arg: any[]): string {
+export default function join(...arg: any[]): string {
   let str = ''
   for (let i = 0; i < arg.length; i++) {
     if (!arg[i]) continue
