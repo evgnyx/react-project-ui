@@ -28,7 +28,8 @@
     "start": "rollup -c -w",
     "prepare": "npm run build",
     "version": "git add -A src",
-    "postversion": "npm run copy && git push && git push --tags"
+    "postversion": "npm run copy && git push && git push --tags",
+    "publish": "cd dist && npm publish"
   },
   "browserslist": [
     "defaults"
