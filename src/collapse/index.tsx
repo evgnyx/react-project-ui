@@ -52,7 +52,7 @@ function Collapse({
   const handleTransition = React.useCallback(({ propertyName, type }) => {
     if (propertyName !== 'height') return
     if (type === 'transitionend') {
-      const _isOpen = elementRef.current!.clientHeight === contentRef.current!.clientHeight
+      const _isOpen = elementRef.current!.clientHeight >= contentRef.current!.clientHeight
       setState({
         height: _isOpen ? 'auto' : elementRef.current!.clientHeight,
         dataCollapse: _isOpen ? Settings.isOpen : Settings.isClosed,
