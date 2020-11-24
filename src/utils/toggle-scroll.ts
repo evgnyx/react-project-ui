@@ -13,7 +13,6 @@ function disableScroll() {
 }
 
 export default function toggleScroll(value: boolean): Fn {
-  console.log(value)
   if (value) {
     enableScroll()
     return disableScroll
