@@ -5,10 +5,12 @@ import CONFIG from '../config'
 
 interface RowProps extends React.PropsWithChildren<{
   className?: string
+  jc?: 'between' | 'center' | 'start' | 'end'
 }> {}
 
 const Row = React.forwardRef(function Row({
   className,
+  jc,
   children
 }: RowProps, ref: any) {
   const styles = CONFIG.row || {}
@@ -17,6 +19,7 @@ const Row = React.forwardRef(function Row({
       className={
         join(
           styles.uiRow,
+          jc && styles[jc],
           className
         )
       }
