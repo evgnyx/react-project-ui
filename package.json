@@ -21,7 +21,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prebuild": "rimraf dist",
-    "build": "rollup -c && npm run types",
+    "build": "rollup -c && npm run types && npm run copy",
     "types": "tsc --emitDeclarationOnly",
     "css": "postcss src/**/*.less --watch --dir dist/css --base src --ext css",
     "copy": "node scripts/build",
