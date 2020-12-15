@@ -3,28 +3,28 @@ import join from '../utils/join'
 import CONFIG from '../config'
 // import { Fn } from '../types'
 
-interface ButtonProps extends React.PropsWithChildren<{
+interface RowProps extends React.PropsWithChildren<{
   className?: string
 }> {}
 
-const Button = React.forwardRef(function Button({
+const Row = React.forwardRef(function Row({
   className,
   children
-}: ButtonProps, ref: any) {
-  const styles = CONFIG.button || {}
+}: RowProps, ref: any) {
+  const styles = CONFIG.row || {}
   return (
-    <button
+    <div
       className={
         join(
-          styles.uiButton,
+          styles.uiRow,
           className
         )
       }
       ref={ ref }
     >
       { children }
-    </button>
+    </div>
   )
 })
 
-export default Button
+export default Row

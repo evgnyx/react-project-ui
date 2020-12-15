@@ -3,10 +3,6 @@ import join from '../utils/join'
 import CONFIG from '../config'
 // import { Fn } from '../types'
 
-const Settings = {
-  class: 'ui-svg',
-}
-
 interface SvgProps extends React.PropsWithChildren<{
   className?: string
   name: string
@@ -21,7 +17,7 @@ const Svg = React.forwardRef(function Svg({
     <span
       className={
         join(
-          styles.uiSvg || Settings.class,
+          styles.uiSvg,
           className
         )
       }
