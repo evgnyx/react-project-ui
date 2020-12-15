@@ -9,11 +9,11 @@ import copy from 'rollup-plugin-copy'
 export default [
 	{
     preserveModules: true,
-    input: './src/index.tsx',
-		// input: [
-    //   'src/button/index.tsx',
-    //   'src/text/index.tsx',
-    // ],
+    // input: './src/index.tsx',
+		input: [
+      'src/index.tsx',
+      'src/utils/index.ts',
+    ],
 
     // manualChunks(id) {
     //   if (id.includes('node_modules')) {
