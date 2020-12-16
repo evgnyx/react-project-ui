@@ -2,17 +2,17 @@ import * as React from 'react'
 import join from '../utils/join'
 import CONFIG from '../config'
 
-export interface ButtonProps extends React.PropsWithChildren<{
+export interface ButtonProps extends React.PropsWithChildren<React.HTMLAttributes<HTMLButtonElement>> {
   className?: string
   variant?: string
   color?: string
-}> {}
+}
 
 const Button = React.forwardRef(function Button({
   className,
   variant,
   color,
-  children
+  ...props
 }: ButtonProps, ref: any) {
   const styles = CONFIG.button || {}
   return (
@@ -25,10 +25,9 @@ const Button = React.forwardRef(function Button({
           className
         )
       }
+      { ...props }
       ref={ ref }
-    >
-      { children }
-    </button>
+    />
   )
 })
 

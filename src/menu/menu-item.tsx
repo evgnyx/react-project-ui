@@ -2,12 +2,14 @@ import * as React from 'react'
 import join from '../utils/join'
 import CONFIG from '../config'
 
-interface MenuItemProps extends React.PropsWithChildren<{
+export interface MenuItemProps extends React.PropsWithChildren<{
   className?: string
+  active?: boolean
 }> {}
 
 const MenuItem = React.forwardRef(function MenuItem({
   className,
+  active,
   children
 }: MenuItemProps, ref: any) {
   const styles = CONFIG.menu || {}
@@ -16,6 +18,7 @@ const MenuItem = React.forwardRef(function MenuItem({
       className={
         join(
           styles.uiMenuItem,
+          active && styles.active,
           className
         )
       }

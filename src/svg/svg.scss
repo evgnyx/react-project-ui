@@ -1,0 +1,10 @@
+.ui-svg {
+  display: inline-block;
+  vertical-align: middle;
+
+  > svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}

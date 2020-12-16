@@ -2,17 +2,19 @@ import * as React from 'react'
 import join from '../utils/join'
 import CONFIG from '../config'
 
-interface TextProps extends React.PropsWithChildren<{
+export interface TextProps extends React.PropsWithChildren<{
   className?: string
   size?: string | number
+  width?: string | number
   as?: string
 }> {}
 
 const Text = React.forwardRef(function Text({
   className,
   size,
+  width,
   as = 'p',
-  children
+  ...props
 }: TextProps, ref: any) {
   const styles = CONFIG.text || {}
   const Tag = as as any
@@ -22,13 +24,13 @@ const Text = React.forwardRef(function Text({
         join(
           styles.uiText,
           size && styles[`fs${ size }`],
+          width && styles[`w${ width }`],
           className
         )
       }
+      { ...props }
       ref={ ref }
-    >
-      { children }
-    </Tag>
+    />
   )
 })
 
