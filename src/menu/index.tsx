@@ -1,35 +1,37 @@
 import * as React from 'react'
 import join from '../utils/join'
 import CONFIG from '../config'
+import MenuItem from './menu-item'
 
-export interface ButtonProps extends React.PropsWithChildren<{
+interface MenuProps extends React.PropsWithChildren<{
   className?: string
   variant?: string
-  color?: string
 }> {}
 
-const Button = React.forwardRef(function Button({
+const Menu = React.forwardRef(function Menu({
   className,
   variant,
-  color,
   children
-}: ButtonProps, ref: any) {
-  const styles = CONFIG.button || {}
+}: MenuProps, ref: any) {
+  const styles = CONFIG.menu || {}
   return (
-    <button
+    <ul
       className={
         join(
-          styles.uiButton,
+          styles.uiMenu,
           variant && styles[variant],
-          color && styles[color],
           className
         )
       }
       ref={ ref }
     >
       { children }
-    </button>
+    </ul>
   )
 })
 
-export default Button
+;(Menu as any).Item = MenuItem
+
+export default Menu as typeof Menu & {
+  Item: typeof MenuItem
+}

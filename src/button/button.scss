@@ -1,26 +1,16 @@
-@mixin button() {
-  .ui-button {
-    display: inline-flex;
-    align-items: center;
-    flex-direction: row;
-    justify-content: center;
+.ui-button {
+  display: inline-flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
 
-    font-family: inherit;
-    font-weight: 400;
+  font: inherit;
 
-    appearance: none;
-    box-shadow: none;
-    border: 1px solid transparent;
-    outline: none;
+  appearance: none;
+  box-shadow: none;
+  outline: none;
 
-    vertical-align: middle;
-    user-select: none;
-    cursor: pointer;
-
-    @content;
-
-    &:disabled {
-      cursor: not-allowed;
-    }
-  }
+  vertical-align: middle;
+  user-select: none;
+  cursor: pointer;
 }

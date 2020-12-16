@@ -1,0 +1,35 @@
+.ui-flex {
+  display: flex;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.jcstart {
+  justify-content: flex-start;
+}
+
+.jcend {
+  justify-content: flex-end;
+}
+
+.jccenter {
+  justify-content: center;
+}
+
+.jcbetween {
+  justify-content: space-between;
+}
+
+.aistart {
+  align-items: flex-start;
+}
+
+.aiend {
+  align-items: flex-end;
+}
+
+.aicenter {
+  align-items: center;
+}
