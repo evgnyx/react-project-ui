@@ -1,21 +1,18 @@
 import * as React from 'react'
-import { Link as RouterLink } from 'react-router-dom'
+import { Link as RouterLink, LinkProps as RouterLinkProps } from 'react-router-dom'
 import Text, { TextProps } from '../text'
 import join from '../utils/join'
 import CONFIG from '../config'
 
-export interface LinkProps extends React.PropsWithChildren<TextProps> {
-  to?: string
+export interface LinkProps<S = unknown> extends RouterLinkProps<S>, React.PropsWithChildren<TextProps> {
   href?: string
 }
 
 const Link = React.forwardRef(function Link({
   className,
-  to,
-  href,
   ...props
 }: LinkProps, ref: any) {
-  const styles = CONFIG.link || {}
+  const styles = CONFIG.text || {}
 
   return (
     <Text
@@ -25,7 +22,7 @@ const Link = React.forwardRef(function Link({
           className
         )
       }
-      as={ to ? RouterLink : 'a' }
+      as={ props.to ? RouterLink : 'a' }
       { ...props }
       ref={ ref }
     />
