@@ -6,7 +6,7 @@ export interface TextProps extends React.PropsWithChildren<{
   className?: string
   size?: string | number
   width?: string | number
-  as?: string
+  as?: string | React.FunctionComponent<any>
 }> {}
 
 const Text = React.forwardRef(function Text({
