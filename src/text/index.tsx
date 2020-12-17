@@ -6,6 +6,8 @@ export interface TextProps extends React.PropsWithChildren<{
   className?: string
   size?: string | number
   width?: string | number
+  color?: string
+  variant?: string
   as?: string | React.FunctionComponent<any>
 }> {}
 
@@ -13,6 +15,8 @@ const Text = React.forwardRef(function Text({
   className,
   size,
   width,
+  color,
+  variant,
   as = 'p',
   ...props
 }: TextProps, ref: any) {
@@ -25,6 +29,8 @@ const Text = React.forwardRef(function Text({
           styles.uiText,
           size && styles[`fs${ size }`],
           width && styles[`w${ width }`],
+          color && styles[`c${ color }`],
+          variant && styles[variant],
           className
         )
       }
