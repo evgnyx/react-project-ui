@@ -1,9 +1,9 @@
-.ui-flex {
+.ui-flex, .ui-flex-column {
   display: flex;
 }
 
-.row {
-  flex-direction: row;
+.ui-flex-column {
+  flex-direction: column;
 }
 
 .jcstart {

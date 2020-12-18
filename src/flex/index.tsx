@@ -6,14 +6,14 @@ interface FlexProps extends React.PropsWithChildren<{
   className?: string
   ai?: 'center' | 'start' | 'end'
   jc?: 'between' | 'center' | 'start' | 'end'
-  row?: boolean
+  column?: boolean
 }> {}
 
 const Flex = React.forwardRef(function Flex({
   className,
   ai,
   jc,
-  row,
+  column,
   children
 }: FlexProps, ref: any) {
   const styles = CONFIG.flex || {}
@@ -21,10 +21,9 @@ const Flex = React.forwardRef(function Flex({
     <div
       className={
         join(
-          styles.uiFlex,
+          column ? styles.uiFlexColumn : styles.uiFlex,
           ai && styles[`ai${ ai }`],
           jc && styles[`jc${ jc }`],
-          row && styles.row,
           className
         )
       }
