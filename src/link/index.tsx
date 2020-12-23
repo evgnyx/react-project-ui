@@ -4,8 +4,9 @@ import Text, { TextProps } from '../text'
 import join from '../utils/join'
 import CONFIG from '../config'
 
-export interface LinkProps<S = unknown> extends RouterLinkProps<S>, React.PropsWithChildren<TextProps> {
+export interface LinkProps extends TextProps {
   href?: string
+  to?: RouterLinkProps['to']
 }
 
 const Link = React.forwardRef(function Link({

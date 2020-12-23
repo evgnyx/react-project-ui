@@ -2,20 +2,22 @@ import * as React from 'react'
 import join from '../utils/join'
 import CONFIG from '../config'
 
-export interface TextProps extends React.PropsWithChildren<{
+export interface TextProps extends React.HTMLAttributes<HTMLElement> {
   className?: string
   size?: string | number
-  width?: string | number
+  weight?: string | number
   color?: string
+  underline?: boolean
   variant?: string
   as?: string | React.FunctionComponent<any>
-}> {}
+}
 
 const Text = React.forwardRef(function Text({
   className,
   size,
-  width,
+  weight,
   color,
+  underline,
   variant,
   as = 'p',
   ...props
@@ -27,10 +29,11 @@ const Text = React.forwardRef(function Text({
       className={
         join(
           styles.uiText,
-          size && styles[`fs${ size }`],
-          width && styles[`w${ width }`],
-          color && styles[`c${ color }`],
           variant && styles[variant],
+          size && styles[`fs${ size }`],
+          weight && styles[`w${ weight }`],
+          color && styles[`c${ color }`],
+          underline && styles.underline,
           className
         )
       }
