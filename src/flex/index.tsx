@@ -2,19 +2,19 @@ import * as React from 'react'
 import join from '../utils/join'
 import CONFIG from '../config'
 
-interface FlexProps extends React.PropsWithChildren<{
+interface FlexProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string
   ai?: 'center' | 'start' | 'end'
   jc?: 'between' | 'center' | 'start' | 'end'
   column?: boolean
-}> {}
+}
 
 const Flex = React.forwardRef(function Flex({
   className,
   ai,
   jc,
   column,
-  children
+  ...props
 }: FlexProps, ref: any) {
   const styles = CONFIG.flex || {}
   return (
@@ -28,9 +28,8 @@ const Flex = React.forwardRef(function Flex({
         )
       }
       ref={ ref }
-    >
-      { children }
-    </div>
+      { ...props }
+    />
   )
 })
 
