@@ -7,7 +7,6 @@ export interface TextProps extends React.HTMLAttributes<HTMLElement> {
   size?: string | number
   weight?: string | number
   color?: string
-  underline?: boolean
   variant?: string
   as?: string | React.FunctionComponent<any>
 }
@@ -17,7 +16,6 @@ const Text = React.forwardRef(function Text({
   size,
   weight,
   color,
-  underline,
   variant,
   as = 'p',
   ...props
@@ -33,7 +31,6 @@ const Text = React.forwardRef(function Text({
           size && styles[`fs${ size }`],
           weight && styles[`w${ weight }`],
           color && styles[`c${ color }`],
-          underline && styles.underline,
           className
         )
       }
