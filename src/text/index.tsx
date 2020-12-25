@@ -2,8 +2,8 @@ import * as React from 'react'
 import join from '../utils/join'
 import CONFIG from '../config'
 
-export interface TextProps extends React.HTMLAttributes<HTMLElement> {
-  className?: string
+export interface TextProps
+  extends React.HTMLAttributes<HTMLElement> {
   size?: string | number
   weight?: string | number
   color?: string

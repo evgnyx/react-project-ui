@@ -1,0 +1,21 @@
+.ui {
+  &-input-container {
+    position: relative;
+    display: flex;
+  }
+
+  &-input {
+    display: block;
+    margin: 0;
+    color: currentColor;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    background: none;
+    border: none;
+    appearance: none;
+    order: 1;
+    outline: none;
+  }
+}

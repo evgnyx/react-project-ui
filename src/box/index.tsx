@@ -2,11 +2,11 @@ import * as React from 'react'
 import join from '../utils/join'
 import CONFIG from '../config'
 
-export interface BoxProps extends React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement>> {
-  className?: string
+export interface BoxProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   variant?: string
   elevation?: string | number
-  as?: string | React.FunctionComponent<any>
+  as?: 'div' | 'form' | string | React.FunctionComponent<any>
 }
 
 const Box = React.forwardRef(function Box({
@@ -28,8 +28,8 @@ const Box = React.forwardRef(function Box({
           className
         )
       }
-      ref={ ref }
       { ...props }
+      ref={ ref }
     />
   )
 })
