@@ -3,7 +3,7 @@ import { Link, LinkProps } from 'react-router-dom'
 import join from '../utils/join'
 import { getStyles } from '../config'
 
-export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string
   variant?: string
   color?: string

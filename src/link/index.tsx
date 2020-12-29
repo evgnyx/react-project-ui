@@ -2,10 +2,9 @@ import * as React from 'react'
 import { Link as RouterLink, LinkProps as RouterLinkProps } from 'react-router-dom'
 import Text, { TextProps } from '../text'
 import join from '../utils/join'
-import CONFIG from '../config'
+import { getStyles } from '../config'
 
 export interface LinkProps extends TextProps {
-  href?: string
   to?: RouterLinkProps['to']
 }
 
@@ -13,8 +12,7 @@ const Link = React.forwardRef(function Link({
   className,
   ...props
 }: LinkProps, ref: any) {
-  const styles = CONFIG.text || {}
-
+  const styles = getStyles('text')
   return (
     <Text
       className={

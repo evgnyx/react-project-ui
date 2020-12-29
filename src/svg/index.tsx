@@ -6,12 +6,14 @@ import CONFIG from '../config'
 export interface SvgProps extends React.PropsWithChildren<{
   className?: string
   size?: string
+  color?: string
   name: string
 }> {}
 
 const Svg = React.forwardRef(function Svg({
   className,
   size,
+  color,
   name
 }: SvgProps, ref: any) {
   const styles = CONFIG.svg || {}
@@ -21,6 +23,7 @@ const Svg = React.forwardRef(function Svg({
         join(
           styles.uiSvg,
           size && styles[size] || styles.default,
+          color && styles[color],
           className
         )
       }

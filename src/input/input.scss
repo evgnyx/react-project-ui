@@ -1,10 +1,10 @@
 .ui {
-  &-input-container {
+  &-input {
     position: relative;
     display: flex;
   }
 
-  &-input {
+  &-input-field {
     display: block;
     margin: 0;
     color: currentColor;

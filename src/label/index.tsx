@@ -12,8 +12,8 @@ const Label = React.forwardRef(function Label({
   return (
     <Text
       className={ className }
-      { ...props }
       as="label"
+      { ...props }
       ref={ ref }
     />
   )

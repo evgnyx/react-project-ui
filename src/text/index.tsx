@@ -1,39 +1,42 @@
 import * as React from 'react'
 import join from '../utils/join'
-import CONFIG from '../config'
+import { getStyles } from '../config'
 
 export interface TextProps
   extends React.HTMLAttributes<HTMLElement> {
+  variant?: string
   size?: string | number
   weight?: string | number
   color?: string
-  variant?: string
+  align?: 'center' | 'right'
   as?: string | React.FunctionComponent<any>
 }
 
 const Text = React.forwardRef(function Text({
   className,
+  variant,
   size,
   weight,
   color,
-  variant,
+  align,
   as = 'p',
   ...props
 }: TextProps, ref: any) {
-  const styles = CONFIG.text || {}
+  const styles = getStyles('text')
   const Tag = as as any
+  const classlist = React.useMemo(() => join(
+    styles.uiText,
+    variant && styles[variant],
+    size && styles[`fs${ size }`],
+    weight && styles[`w${ weight }`],
+    color && styles[`c${ color }`],
+    align && styles[align],
+    className
+  ), [variant, size, weight, color, align, className])
+
   return (
     <Tag
-      className={
-        join(
-          styles.uiText,
-          variant && styles[variant],
-          size && styles[`fs${ size }`],
-          weight && styles[`w${ weight }`],
-          color && styles[`c${ color }`],
-          className
-        )
-      }
+      className={ classlist }
       { ...props }
       ref={ ref }
     />

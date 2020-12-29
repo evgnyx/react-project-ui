@@ -2,36 +2,36 @@ import * as React from 'react'
 import join from '../utils/join'
 import { getStyles } from '../config'
 
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   color?: string
 }
 
-const Input = React.forwardRef(function Input({
+const Textarea = React.forwardRef(function Textarea({
   className,
   color,
   children,
   ...props
-}: InputProps, ref: any) {
-  const styles = getStyles('input')
+}: TextareaProps, ref) {
+  const styles = getStyles('textarea')
   return (
     <div
       className={
         join(
-          styles.uiInput,
+          styles.uiTextarea,
           props.value && styles.isComplete,
           color && styles[color],
           className
         )
       }
     >
-      <input
-        className={ styles.uiInputField }
+      <textarea
+        className={ styles.uiTextareaField }
         { ...props }
-        ref={ ref }
+        ref={ ref as any }
       />
       { children }
     </div>
   )
 })
 
-export default Input
+export default Textarea
