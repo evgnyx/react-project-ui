@@ -3,18 +3,19 @@ import join from '../utils/join'
 import CONFIG from '../config'
 // import { Fn } from '../types'
 
-export interface SvgProps extends React.PropsWithChildren<{
+export interface SvgProps extends React.HTMLAttributes<HTMLSpanElement> {
   className?: string
   size?: string
   color?: string
   name: string
-}> {}
+}
 
 const Svg = React.forwardRef(function Svg({
   className,
   size,
   color,
-  name
+  name,
+  ...props
 }: SvgProps, ref: any) {
   const styles = CONFIG.svg || {}
   return (
@@ -27,6 +28,7 @@ const Svg = React.forwardRef(function Svg({
           className
         )
       }
+      { ...props }
       ref={ ref }
     >
       <svg>
