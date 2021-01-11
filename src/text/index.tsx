@@ -9,6 +9,7 @@ export interface TextProps
   weight?: string | number
   color?: string
   align?: 'center' | 'right'
+  href?: string
   as?: string | React.FunctionComponent<any>
 }
 
