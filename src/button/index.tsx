@@ -8,6 +8,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   variant?: string
   color?: string
   size?: string
+  active?: boolean
   href?: string
   to?: LinkProps['to']
   as?: React.ReactNode
@@ -18,6 +19,7 @@ const Button = React.forwardRef(function Button({
   variant = 'default',
   color,
   size,
+  active,
   as = 'button',
   ...props
 }: ButtonProps, ref: any) {
@@ -36,6 +38,7 @@ const Button = React.forwardRef(function Button({
           variant && styles[variant],
           color && styles[color],
           size && styles[size],
+          active && styles.active,
           className
         )
       }
