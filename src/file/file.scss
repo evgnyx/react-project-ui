@@ -1,0 +1,13 @@
+.ui-file {
+  position: relative;
+
+  &-input {
+    position: absolute;
+    margin: 0;
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    z-index: -1;
+  }
+}
