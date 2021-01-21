@@ -1,6 +1,6 @@
 import { Fn } from '../types'
 
-export default function throttle(fn: Fn, delay = 100, debounce = false) {
+export default function throttle(fn: Fn, delay = 100, debounce = false): Fn {
   let timer: any
   let init = debounce
   return (e: any) => {

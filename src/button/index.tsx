@@ -3,7 +3,9 @@ import { Link, LinkProps } from 'react-router-dom'
 import join from '../utils/join'
 import { getStyles } from '../config'
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+type ButtonAttributes = React.ButtonHTMLAttributes<HTMLButtonElement>
+
+export interface ButtonProps extends Omit<ButtonAttributes, 'value'> {
   className?: string
   variant?: string
   color?: string
@@ -12,6 +14,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   href?: string
   to?: LinkProps['to']
   as?: React.ReactNode
+  value?: ButtonAttributes['value'] | null
 }
 
 const Button = React.forwardRef(function Button({

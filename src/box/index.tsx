@@ -7,6 +7,7 @@ export interface BoxProps
   variant?: string
   elevation?: string | number
   as?: 'div' | 'form' | string | React.FunctionComponent<any>
+  [key: string]: any
 }
 
 const Box = React.forwardRef(function Box({

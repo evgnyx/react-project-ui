@@ -7,6 +7,7 @@ interface FlexProps extends React.HTMLAttributes<HTMLDivElement> {
   ai?: 'center' | 'start' | 'end'
   jc?: 'between' | 'center' | 'start' | 'end'
   column?: boolean
+  as?: string
 }
 
 const Flex = React.forwardRef(function Flex({
@@ -14,11 +15,13 @@ const Flex = React.forwardRef(function Flex({
   ai,
   jc,
   column,
+  as = 'div',
   ...props
 }: FlexProps, ref: any) {
   const styles = CONFIG.flex || {}
+  const Tag = as as any
   return (
-    <div
+    <Tag
       className={
         join(
           column ? styles.uiFlexColumn : styles.uiFlex,
