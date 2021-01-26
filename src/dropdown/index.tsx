@@ -10,7 +10,12 @@ function isFunction(value: any): value is Function {
   return typeof value === 'function'
 }
 
-function handleChild(value: any, props?: any) {
+interface TriggerProps extends React.DOMAttributes<HTMLDivElement> {}
+interface DropProps extends React.DOMAttributes<HTMLDivElement> {
+  close: any
+}
+
+function handleChild(value: any, props?: TriggerProps | DropProps) {
   return isFunction(value)
     ? value(props)
     : React.cloneElement(value, props)
@@ -19,11 +24,13 @@ function handleChild(value: any, props?: any) {
 type ChildType = React.ReactElement | ((props: any) => React.ReactElement)
 
 interface DropdownProps extends React.HTMLAttributes<HTMLDivElement> {
+  showOnHover?: boolean
   children: [ChildType, ChildType]
 }
 
 const Dropdown = React.forwardRef(function Dropdown({
   className,
+  showOnHover,
   children,
   ...props
 }: DropdownProps, ref: any) {
@@ -44,7 +51,7 @@ const Dropdown = React.forwardRef(function Dropdown({
   const handler = React.useRef<Fn>()
   const [trigger, dropdown] = React.useMemo(() => {
     const trigger = handleChild(children[0], {
-      onClick: () => setOpen((x) => !x)
+      onClick: () => setOpen((x) => !x),
     })
 
     let dropdown = null
@@ -57,6 +64,7 @@ const Dropdown = React.forwardRef(function Dropdown({
     else {
       handler.current && handler.current()
     }
+
     return [trigger, dropdown]
   }, [open])
 
@@ -66,6 +74,8 @@ const Dropdown = React.forwardRef(function Dropdown({
     <div
       className={ join(styles.uiDropdown, className) }
       { ...props }
+      onMouseEnter={ showOnHover ? () => setOpen(true) : props.onMouseEnter }
+      onMouseLeave={ showOnHover ? () => setOpen(false) : props.onMouseLeave }
       ref={ mergedRef }
     >
       { trigger }

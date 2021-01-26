@@ -7,7 +7,8 @@ interface FlexProps extends React.HTMLAttributes<HTMLDivElement> {
   ai?: 'center' | 'start' | 'end'
   jc?: 'between' | 'center' | 'start' | 'end'
   column?: boolean
-  as?: string
+  as?: 'div' | 'form' | string | React.FunctionComponent<any>
+  [key: string]: any
 }
 
 const Flex = React.forwardRef(function Flex({

@@ -8,11 +8,13 @@ import MenuText from './menu-text'
 export interface MenuProps extends React.PropsWithChildren<{
   className?: string
   variant?: string
+  color?: string
 }> {}
 
 const Menu = React.forwardRef(function Menu({
   className,
   variant,
+  color,
   children
 }: MenuProps, ref: any) {
   const styles = CONFIG.menu || {}
@@ -22,6 +24,7 @@ const Menu = React.forwardRef(function Menu({
         join(
           styles.uiMenu,
           variant && styles[variant],
+          styles[color as any],
           className
         )
       }
