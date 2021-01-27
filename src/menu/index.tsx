@@ -9,12 +9,14 @@ export interface MenuProps extends React.PropsWithChildren<{
   className?: string
   variant?: string
   color?: string
+  horizontal?: boolean
 }> {}
 
 const Menu = React.forwardRef(function Menu({
   className,
   variant,
   color,
+  horizontal,
   children
 }: MenuProps, ref: any) {
   const styles = CONFIG.menu || {}
@@ -23,6 +25,7 @@ const Menu = React.forwardRef(function Menu({
       className={
         join(
           styles.uiMenu,
+          horizontal && styles.horizontal,
           variant && styles[variant],
           styles[color as any],
           className

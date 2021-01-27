@@ -10,12 +10,13 @@ function isFunction(value: any): value is Function {
   return typeof value === 'function'
 }
 
-interface TriggerProps extends React.DOMAttributes<HTMLDivElement> {}
-interface DropProps extends React.DOMAttributes<HTMLDivElement> {
-  close: any
+interface ChildProps extends React.DOMAttributes<HTMLDivElement> {
+  isOpen: boolean
+  open: Fn
+  close: Fn
 }
 
-function handleChild(value: any, props?: TriggerProps | DropProps) {
+function handleChild(value: any, props?: ChildProps) {
   return isFunction(value)
     ? value(props)
     : React.cloneElement(value, props)
@@ -40,24 +41,31 @@ const Dropdown = React.forwardRef(function Dropdown({
 
   const containerRef = React.useRef(null)
   const mergedRef = useMergedRefs<HTMLDivElement>(ref, containerRef)
+  const onOpen = () => setOpen(true)
+  const onClose = () => setOpen(false)
 
   const handleClickOutside = React.useCallback((e) => {
     if (!mergedRef.current) return
     if (!isInside(e.target, mergedRef.current)) {
-      setOpen(false)
+      onClose()
     }
   }, [])
 
   const handler = React.useRef<Fn>()
   const [trigger, dropdown] = React.useMemo(() => {
     const trigger = handleChild(children[0], {
+      isOpen: open,
+      open: onOpen,
+      close: onClose,
       onClick: () => setOpen((x) => !x),
     })
 
     let dropdown = null
     if (open) {
       dropdown = handleChild(children[1], {
-        close: () => setOpen(false)
+        isOpen: open,
+        open: onOpen,
+        close: onClose,
       })
       handler.current = listen(document, 'click', handleClickOutside)
     }
@@ -72,10 +80,16 @@ const Dropdown = React.forwardRef(function Dropdown({
 
   return (
     <div
-      className={ join(styles.uiDropdown, className) }
+      className={
+        join(
+          styles.uiDropdown,
+          open && styles.open,
+          className
+        )
+      }
+      onMouseEnter={ showOnHover ? onOpen : props.onMouseEnter }
+      onMouseLeave={ showOnHover ? onClose : props.onMouseLeave }
       { ...props }
-      onMouseEnter={ showOnHover ? () => setOpen(true) : props.onMouseEnter }
-      onMouseLeave={ showOnHover ? () => setOpen(false) : props.onMouseLeave }
       ref={ mergedRef }
     >
       { trigger }
