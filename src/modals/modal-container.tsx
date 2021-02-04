@@ -12,7 +12,7 @@ function ModalContainer({
   onClose,
   children
 }: ModalContainerProps) {
-  const styles = getStyles('text')
+  const styles = getStyles('modal')
 
   const handleClose = React.useCallback(() => {
     onClose && onClose()
