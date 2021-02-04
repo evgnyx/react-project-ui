@@ -2,13 +2,11 @@ import * as React from 'react'
 import join from '../utils/join'
 import CONFIG from '../config'
 
-interface FlexProps extends React.HTMLAttributes<HTMLDivElement> {
-  className?: string
+interface FlexProps extends React.HTMLAttributes<any> {
   ai?: 'center' | 'start' | 'end'
   jc?: 'between' | 'center' | 'start' | 'end'
   column?: boolean
   as?: 'div' | 'form' | string | React.FunctionComponent<any>
-  [key: string]: any
 }
 
 const Flex = React.forwardRef(function Flex({
@@ -16,11 +14,10 @@ const Flex = React.forwardRef(function Flex({
   ai,
   jc,
   column,
-  as = 'div',
+  as: Tag = 'div',
   ...props
 }: FlexProps, ref: any) {
   const styles = CONFIG.flex || {}
-  const Tag = as as any
   return (
     <Tag
       className={

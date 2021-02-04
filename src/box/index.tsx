@@ -7,18 +7,16 @@ export interface BoxProps
   variant?: string
   elevation?: string | number
   as?: 'div' | 'form' | string | React.FunctionComponent<any>
-  [key: string]: any
 }
 
 const Box = React.forwardRef(function Box({
   className,
   variant,
   elevation,
-  as = 'div',
+  as: Tag = 'div',
   ...props
 }: BoxProps, ref: any) {
   const styles = CONFIG.box || {}
-  const Tag = as as any
   return (
     <Tag
       className={
