@@ -1,7 +1,7 @@
 import * as React from 'react'
 import join from '../utils/join'
 import { getStyles } from '../config'
-import ModalsState, { ModalProps } from './state'
+import ModalsState, { ModalProps, ModalsChildProps } from './state'
 
 interface ModalContainerProps extends React.PropsWithChildren<ModalProps> {
   index: number
@@ -25,8 +25,13 @@ function ModalContainer({
         className={ styles.uiModalOverlay }
         onClick={ handleClose }
       />
-      { React.cloneElement(React.Children.only(children) as any, {
-          close: handleClose
+      { React.cloneElement<ModalsChildProps>(React.Children.only(children) as any, {
+          modal: {
+            index,
+            open: ModalsState.openModal,
+            close: handleClose,
+            replace: ModalsState.replaceModal,
+          }
         })
       }
     </div>

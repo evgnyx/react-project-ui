@@ -1,6 +1,7 @@
 export { configure } from './config'
-export { default as Collapse } from './collapse'
 export { default as Button } from './button'
+export { default as Checkbox } from './checkbox'
+export { default as Collapse } from './collapse'
 export { default as Dropdown } from './dropdown'
 export { default as Flex } from './flex'
 export { default as File } from './file'
