@@ -1,22 +1,16 @@
 import * as React from 'react'
-import join from '../utils/join'
+import { cloneElement } from 'react'
 import { getStyles } from '../config'
-import { ModalProps, ModalsChildProps, ModalsStateInterface } from './'
-
-interface ModalContainerProps extends React.PropsWithChildren<ModalProps> {
-  index: number
-  openModal: ModalsStateInterface['openModal']
-  closeModal: ModalsStateInterface['closeModal']
-  replaceModal: ModalsStateInterface['replaceModal']
-}
+import { ModalContainerProps } from './'
 
 function ModalContainer({
   index,
   onClose,
   openModal,
-  replaceModal,
   closeModal,
-  children
+  replaceModal,
+  children,
+  ...props
 }: ModalContainerProps) {
   const styles = getStyles('modal')
 
@@ -26,14 +20,16 @@ function ModalContainer({
   }, [index])
 
   return (
-    <div className={ join(styles.uiModalContainer) }>
+    <div
+      className={ styles.uiModalContainer }
+    >
       <div
         className={ styles.uiModalOverlay }
         onClick={ handleClose }
       />
-      { React.cloneElement<ModalsChildProps>(React.Children.only(children) as any, {
+      { cloneElement(children, {
+          ...props,
           modal: {
-            index,
             open: openModal,
             close: handleClose,
             replace: replaceModal,
@@ -44,4 +40,4 @@ function ModalContainer({
   )
 }
 
-export default ModalContainer
+export default React.memo(ModalContainer)
