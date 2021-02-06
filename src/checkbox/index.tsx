@@ -2,21 +2,18 @@ import * as React from 'react'
 import join from '../utils/join'
 import { getStyles } from '../config'
 
-type HTMLCheckboxProps = React.InputHTMLAttributes<HTMLInputElement>
-
-interface CheckboxProps extends Omit<HTMLCheckboxProps, 'size' | 'checked' | 'value'> {
-  value?: HTMLCheckboxProps['checked']
+interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
   variant?: string
   color?: string
   size?: string | number
-  type?: 'checkbox' | 'radio'
+  reverse?: boolean
 }
 
 function Checkbox({
-  value,
   variant,
   color,
   size,
+  reverse,
   children,
   ...props
 }: CheckboxProps) {
@@ -27,14 +24,14 @@ function Checkbox({
         className={
           join(
             styles.uiCheckboxField,
+            reverse && styles.reverse,
             styles[variant!],
             styles[color!],
             styles[size!],
           )
         }
-        checked={ value }
-        type="checkbox"
         { ...props }
+        type="checkbox"
       />
       <i className={ styles.uiCheckboxToggle } />
       { children &&
