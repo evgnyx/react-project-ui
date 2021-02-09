@@ -10,6 +10,7 @@ interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>
 }
 
 function Checkbox({
+  className,
   variant,
   color,
   size,
@@ -19,7 +20,7 @@ function Checkbox({
 }: CheckboxProps) {
   const styles = getStyles('checkbox')
   return (
-    <label className={ styles.uiCheckbox }>
+    <label className={ join(styles.uiCheckbox, className) }>
       <input
         className={
           join(
