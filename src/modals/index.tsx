@@ -20,6 +20,8 @@ export interface ModalsListItem {
 
 export interface ModalStateInstance {
   isOpen: boolean
+  isActiveWindow: boolean
+  focusTimer: number
   list: ModalsListItem[]
   run(): void
   init(fn: React.Dispatch<React.SetStateAction<any>>): void

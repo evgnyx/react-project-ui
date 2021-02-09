@@ -27,8 +27,10 @@ const [ModalState, modal] = ((): [
 }] => {
   const ModalState = new class {
     isOpen = false
+    isActiveWindow = true
     list = [] as ModalStateInstance['list']
     run!: any
+    focusTimer!: any
     init = (fn: any) => {
       this.run = fn
     }
@@ -41,12 +43,28 @@ const [ModalState, modal] = ((): [
     }
     closeModal = (index: number) => {
       if (!this.list[index]) return
-      this.list.splice(index, 1)
+      const modal = this.list.splice(index, 1)[0]
+      modal.props.onClose && modal.props.onClose()
       this.update()
     }
     replaceModal = (component: ModalsListItem['component'], config?: ModalsListItem['props'], index: number = this.list.length - 1) => {
       this.list[index] = createModal(component, config!, index)
       this.update()
+    }
+  }
+
+  if (typeof window !== 'undefined') {
+    window.onfocus = () => {
+      clearTimeout(ModalState.focusTimer)
+      ModalState.focusTimer = setTimeout(() => {
+        ModalState.isActiveWindow = true
+      }, 100)
+    }
+    window.onblur = () => {
+      clearTimeout(ModalState.focusTimer)
+      ModalState.focusTimer = setTimeout(() => {
+        ModalState.isActiveWindow = false
+      }, 100)
     }
   }
 
@@ -78,6 +96,12 @@ function Modals({
     ModalState.init(state[1])
   }, [])
 
+  const closeModal = React.useCallback((index) => {
+    if (ModalState.isActiveWindow) {
+      ModalState.closeModal(index)
+    }
+  }, [])
+
   if (ModalState.list.length) {
     if (!ModalState.isOpen) {
       onOpen && onOpen()
@@ -88,7 +112,7 @@ function Modals({
         { ...modal.props }
         index={ i }
         openModal={ ModalState.openModal }
-        closeModal={ ModalState.closeModal }
+        closeModal={ closeModal }
         replaceModal={ ModalState.replaceModal }
         key={ modal.key }
       >

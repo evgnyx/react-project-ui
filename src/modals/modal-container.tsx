@@ -15,9 +15,16 @@ function ModalContainer({
   const styles = getStyles('modal')
 
   const handleClose = React.useCallback(() => {
-    onClose && onClose()
     closeModal(index)
   }, [index])
+
+  const modal = React.useMemo(() => {
+    return {
+      open: openModal,
+      close: handleClose,
+      replace: replaceModal,
+    }
+  }, [handleClose])
 
   return (
     <div
@@ -27,15 +34,7 @@ function ModalContainer({
         className={ styles.uiModalOverlay }
         onClick={ handleClose }
       />
-      { cloneElement(children, {
-          ...props,
-          modal: {
-            open: openModal,
-            close: handleClose,
-            replace: replaceModal,
-          }
-        })
-      }
+      { cloneElement(children, { ...props, modal }) }
     </div>
   )
 }

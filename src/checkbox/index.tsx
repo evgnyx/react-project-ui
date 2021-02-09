@@ -20,17 +20,20 @@ function Checkbox({
 }: CheckboxProps) {
   const styles = getStyles('checkbox')
   return (
-    <label className={ join(styles.uiCheckbox, className) }>
+    <label
+      className={
+        join(
+          styles.uiCheckbox,
+          reverse && styles.reverse,
+          styles[variant!],
+          styles[color!],
+          styles[size!],
+          className
+        )
+      }
+    >
       <input
-        className={
-          join(
-            styles.uiCheckboxField,
-            reverse && styles.reverse,
-            styles[variant!],
-            styles[color!],
-            styles[size!],
-          )
-        }
+        className={ styles.uiCheckboxField }
         { ...props }
         type="checkbox"
       />
