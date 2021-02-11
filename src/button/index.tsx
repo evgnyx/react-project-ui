@@ -2,13 +2,14 @@ import * as React from 'react'
 import { Link, LinkProps } from 'react-router-dom'
 import join from '../utils/join'
 import { getStyles } from '../config'
+import { ColorType } from '../types'
 
 type ButtonAttributes = React.ButtonHTMLAttributes<HTMLButtonElement>
 
-export interface ButtonProps extends Omit<ButtonAttributes, 'value'> {
+export interface ButtonProps extends Omit<ButtonAttributes, 'value' | 'color'> {
   className?: string
   variant?: string
-  color?: string
+  color?: ColorType
   size?: string
   active?: boolean
   href?: string

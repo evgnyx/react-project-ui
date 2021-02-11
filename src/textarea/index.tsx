@@ -1,9 +1,11 @@
 import * as React from 'react'
 import join from '../utils/join'
 import { getStyles } from '../config'
+import { ColorType } from '../types'
 
-export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  color?: string
+export interface TextareaProps
+  extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'color'> {
+  color?: ColorType
 }
 
 const Textarea = React.forwardRef(function Textarea({
@@ -19,7 +21,7 @@ const Textarea = React.forwardRef(function Textarea({
         join(
           styles.uiTextarea,
           props.value && styles.isComplete,
-          color && styles[color],
+          styles[color as any],
           className
         )
       }

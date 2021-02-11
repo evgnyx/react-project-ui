@@ -1,13 +1,14 @@
 import * as React from 'react'
 import join from '../utils/join'
 import { getStyles } from '../config'
+import { ColorType } from '../types'
 
 export interface TextProps
-  extends React.HTMLAttributes<HTMLElement> {
+  extends Omit<React.HTMLAttributes<HTMLElement>, 'color'> {
   variant?: string
   size?: string | number
   weight?: string | number
-  color?: string
+  color?: ColorType
   align?: 'center' | 'right'
   href?: string
   as?: string | React.FunctionComponent<any>

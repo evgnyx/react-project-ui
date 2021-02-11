@@ -6,12 +6,14 @@ import { Fn } from '../types'
 export interface MenuItemProps extends React.PropsWithChildren<{
   className?: string
   active?: boolean
+  variant?: string
   onClick?: Fn
 }> {}
 
 const MenuItem = React.forwardRef(function MenuItem({
   className,
   active,
+  variant,
   ...props
 }: MenuItemProps, ref: any) {
   const styles = CONFIG.menu || {}
@@ -20,6 +22,7 @@ const MenuItem = React.forwardRef(function MenuItem({
       className={
         join(
           styles.uiMenuItem,
+          styles[variant!],
           active && styles.active,
           className
         )

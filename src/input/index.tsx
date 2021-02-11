@@ -1,9 +1,10 @@
 import * as React from 'react'
 import join from '../utils/join'
 import { getStyles } from '../config'
+import { ColorType } from '../types'
 
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  color?: string
+export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'color'> {
+  color?: ColorType
 }
 
 const Input = React.forwardRef(function Input({
@@ -19,7 +20,7 @@ const Input = React.forwardRef(function Input({
         join(
           styles.uiInput,
           props.value && styles.isComplete,
-          color && styles[color],
+          styles[color as any],
           className
         )
       }

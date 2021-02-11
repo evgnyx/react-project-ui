@@ -1,12 +1,12 @@
 import * as React from 'react'
 import join from '../utils/join'
 import CONFIG from '../config'
-// import { Fn } from '../types'
+import { ColorType } from '../types'
 
-export interface SvgProps extends React.HTMLAttributes<HTMLSpanElement> {
+export interface SvgProps extends Omit<React.HTMLAttributes<HTMLSpanElement>, 'color'> {
   className?: string
   size?: string
-  color?: string
+  color?: ColorType
   name: string
 }
 
@@ -24,7 +24,7 @@ const Svg = React.forwardRef(function Svg({
         join(
           styles.uiSvg,
           size && styles[size] || styles.default,
-          color && styles[color],
+          styles[color as any],
           className
         )
       }

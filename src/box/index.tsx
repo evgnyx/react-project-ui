@@ -1,12 +1,13 @@
 import * as React from 'react'
 import join from '../utils/join'
 import CONFIG from '../config'
+import { ColorType } from '../types'
 
 export interface BoxProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'color'> {
   variant?: string
   elevation?: string | number
-  color?: string
+  color?: ColorType
   as?: 'div' | 'form' | string | React.FunctionComponent<any>
 }
 
@@ -25,7 +26,7 @@ const Box = React.forwardRef(function Box({
         join(
           styles.uiBox,
           styles[variant!],
-          styles[color!],
+          styles[color as any],
           elevation && styles[`elevation${ elevation }`],
           className
         )

@@ -10,7 +10,7 @@ function isFunction(value: any): value is Function {
   return typeof value === 'function'
 }
 
-interface ChildProps extends React.DOMAttributes<HTMLDivElement> {
+export interface ChildProps extends React.DOMAttributes<HTMLDivElement> {
   isOpen: boolean
   open: Fn
   close: Fn

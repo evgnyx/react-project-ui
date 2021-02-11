@@ -1,10 +1,11 @@
 import * as React from 'react'
 import join from '../utils/join'
 import { getStyles } from '../config'
+import { ColorType } from '../types'
 
-interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
+interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'color'> {
   variant?: string
-  color?: string
+  color?: ColorType
   size?: string | number
   reverse?: boolean
 }
@@ -26,7 +27,7 @@ function Checkbox({
           styles.uiCheckbox,
           reverse && styles.reverse,
           styles[variant!],
-          styles[color!],
+          styles[color as any],
           styles[size!],
           className
         )
