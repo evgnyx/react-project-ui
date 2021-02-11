@@ -25,8 +25,8 @@ const Menu = React.forwardRef(function Menu({
   const cl = React.useMemo(() => {
     return join(
       horizontal
-        ? styles.uiMenu
-        : styles.uiMenuHorizontal,
+        ? styles.uiMenuHorizontal
+        : styles.uiMenu,
       styles[variant!],
       styles[color as any],
       className
