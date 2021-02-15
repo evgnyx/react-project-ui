@@ -3,13 +3,15 @@ import join from '../utils/join'
 import { getStyles } from '../config'
 import { ColorType } from '../types'
 
-export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'color'> {
+export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'color' | 'size'> {
   color?: ColorType
+  size?: string
 }
 
 const Input = React.forwardRef(function Input({
   className,
   color,
+  size,
   children,
   ...props
 }: InputProps, ref: any) {
@@ -21,6 +23,7 @@ const Input = React.forwardRef(function Input({
           styles.uiInput,
           props.value && styles.isComplete,
           styles[color as any],
+          styles[size as any],
           className
         )
       }
