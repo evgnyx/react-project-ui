@@ -74,7 +74,7 @@ const Dropdown = React.forwardRef(function Dropdown({
     }
 
     return [trigger, dropdown]
-  }, [open])
+  }, [open, children])
 
   React.useEffect(() => handler.current && handler.current(), [])
 
