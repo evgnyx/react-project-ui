@@ -11,7 +11,7 @@ function Cell({
   const styles = getStyles('table')
   return (
     <div
-      className={ join(styles.uiTalbeCell, className) }
+      className={ join(styles.uiTableCell, className) }
       style={
         width
           ? { minWidth: `${ width }%`, maxWidth: `${ width }%` }
