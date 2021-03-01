@@ -42,6 +42,7 @@ function defineOpt(element: HTMLTextAreaElement, opt: OptParams) {
 
 export interface TextareaProps
   extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'color' | 'size'> {
+  variant?: string
   color?: ColorType
   size?: string
   maxRows?: number
@@ -51,6 +52,7 @@ export interface TextareaProps
 
 const Textarea = React.forwardRef(function Textarea({
   className,
+  variant,
   color,
   size,
   children,
@@ -71,6 +73,11 @@ const Textarea = React.forwardRef(function Textarea({
     onChange && onChange(e)
   }, [])
 
+  const handleContainerClick = React.useCallback(() => {
+    if (!autoHeight || !container.current) return
+    container.current!.getElementsByTagName('textarea')[0]?.focus()
+  }, [autoHeight])
+
   React.useLayoutEffect(() => {
     if (!container.current || !opt.current.auto) return
     const field = container.current.getElementsByTagName('textarea')[0]
@@ -83,12 +90,14 @@ const Textarea = React.forwardRef(function Textarea({
         join(
           styles.uiTextarea,
           props.value && styles.isComplete,
+          styles[variant as any],
           styles[color as any],
           styles[size!],
           resize && styles[resize as any] || styles.resize,
           className
         )
       }
+      onClick={ handleContainerClick }
       style={ style }
       ref={ container }
     >
