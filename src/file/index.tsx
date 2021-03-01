@@ -3,7 +3,9 @@ import useMergedRefs from '../utils/use-merged-refs'
 import join from '../utils/join'
 import { getStyles } from '../config'
 
-export interface FileProps extends React.InputHTMLAttributes<HTMLInputElement> {}
+export interface FileProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value'> {
+  value?: FileList | File[] | File | null
+}
 
 function resetInputFiles(input: HTMLInputElement) {
   input.files = null
