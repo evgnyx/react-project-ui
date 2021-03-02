@@ -37,18 +37,23 @@ function TableLayout({
   return (
     <Table
       className={ className }
+      data-ui="table"
       { ...props }
     >
-      <Table.Row className={ styles.uiTableHead }>
+      <Table.Row
+        className={ styles.uiTableHead }
+        data-ui="head"
+      >
         { columns.map((cell, cellIndex) => (
           <Table.Cell
             className={ join(styles.uiTableHeadCell, cell.className) }
             width={ cell.width }
+            data-ui="head-cell"
             key={ cellIndex }
           >
             { cell.title }
             { cell.head &&
-              <cell.head />
+              <cell.head params={ cell } />
             }
           </Table.Cell>
         ))
@@ -56,11 +61,16 @@ function TableLayout({
       </Table.Row>
 
       { rows.map((row, rowIndex) => (
-        <Table.Row className={ styles.uiTableDataRow } key={ rowIndex }>
+        <Table.Row
+          className={ styles.uiTableDataRow }
+          data-ui="row"
+          key={ rowIndex }
+        >
           { columns.map((col, colIndex) => (
             <Table.Cell
               className={ join(styles.uiTableDataCell, col.className) }
               width={ col.width }
+              data-ui="cell"
               key={ colIndex }
             >
               { col.dataKey &&
