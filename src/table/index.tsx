@@ -1,4 +1,5 @@
 import * as React from 'react'
+import join from '../utils/join'
 import { getStyles } from '../config'
 import { Fn } from '../types'
 import Table from './table'
@@ -17,9 +18,10 @@ interface CellParams {
   formatValue?: Fn
   head?: React.ComponentType<any>
   component?: React.ComponentType<any>
+  className?: string
 }
 
-interface TableLayoutProps {
+interface TableLayoutProps extends TableProps {
   className?: string
   columns: CellParams[]
   rows: { [key: string]: any }[]
@@ -29,14 +31,18 @@ function TableLayout({
   className,
   columns,
   rows,
+  ...props
 }: TableLayoutProps) {
   const styles = getStyles('table')
   return (
-    <Table className={ className }>
+    <Table
+      className={ className }
+      { ...props }
+    >
       <Table.Row className={ styles.uiTableHead }>
         { columns.map((cell, cellIndex) => (
           <Table.Cell
-            className={ styles.uiTableHeadCell }
+            className={ join(styles.uiTableHeadCell, cell.className) }
             width={ cell.width }
             key={ cellIndex }
           >
@@ -52,7 +58,11 @@ function TableLayout({
       { rows.map((row, rowIndex) => (
         <Table.Row className={ styles.uiTableDataRow } key={ rowIndex }>
           { columns.map((col, colIndex) => (
-            <Table.Cell className={ styles.uiTableDataCell } width={ col.width } key={ colIndex }>
+            <Table.Cell
+              className={ join(styles.uiTableDataCell, col.className) }
+              width={ col.width }
+              key={ colIndex }
+            >
               { col.dataKey &&
                 col.formatValue ? col.formatValue(row[col.dataKey]) : row[col.dataKey!]
               }

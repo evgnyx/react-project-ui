@@ -5,10 +5,17 @@ import { TableProps } from './'
 import Row from './row'
 import Cell from './cell'
 
-const Table = function Table({ className, children }: TableProps) {
+const Table = function Table({
+  className,
+  children,
+  ...props
+}: TableProps) {
   const styles = getStyles('table')
   return (
-    <div className={ join(styles.uiTable, className) }>
+    <div
+      className={ join(styles.uiTable, className) }
+      { ...props }
+    >
       { children }
     </div>
   )

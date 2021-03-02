@@ -7,11 +7,13 @@ function Cell({
   className,
   width,
   children,
+  ...props
 }: CellProps) {
   const styles = getStyles('table')
   return (
     <div
       className={ join(styles.uiTableCell, className) }
+      { ...props }
       style={
         width
           ? { minWidth: `${ width }%`, maxWidth: `${ width }%` }
