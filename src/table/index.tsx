@@ -34,12 +34,8 @@ function TableLayout({
   ...props
 }: TableLayoutProps) {
   const styles = getStyles('table')
-  return (
-    <Table
-      className={ className }
-      data-ui="table"
-      { ...props }
-    >
+  const headRow = React.useMemo(() => {
+    return (
       <Table.Row
         className={ styles.uiTableHead }
         data-ui="head"
@@ -51,16 +47,17 @@ function TableLayout({
             data-ui="head-cell"
             key={ cellIndex }
           >
-            { cell.title }
-            { cell.head &&
-              <cell.head params={ cell } />
-            }
+            { renderHeadCell(cell) }
           </Table.Cell>
         ))
         }
       </Table.Row>
+    )
+  }, [columns])
 
-      { rows.map((row, rowIndex) => (
+  const layout = React.useMemo(() => {
+    return (
+      rows.map((row, rowIndex) => (
         <Table.Row
           className={ styles.uiTableDataRow }
           data-ui="row"
@@ -73,20 +70,39 @@ function TableLayout({
               data-ui="cell"
               key={ colIndex }
             >
-              { col.dataKey &&
-                col.formatValue ? col.formatValue(row[col.dataKey]) : row[col.dataKey!]
-              }
-              { col.component &&
-                <col.component data={ row } params={ col } />
-              }
+              { renderCell(col, row) }
             </Table.Cell>
           ))
           }
         </Table.Row>
       ))
-      }
+    )
+  }, [columns, rows])
+
+  return (
+    <Table
+      className={ className }
+      data-ui="table"
+      { ...props }
+    >
+      { headRow }
+      { layout }
     </Table>
   )
+}
+
+function renderHeadCell(data: CellParams) {
+  if (data.head) return <data.head params={ data } />
+  if (data.title) return data.title
+  return null
+}
+
+function renderCell(data: CellParams, row: TableLayoutProps['rows'][0]) {
+  if (data.component) return <data.component data={ row } params={ data } />
+  if (data.dataKey) {
+    return data.formatValue ? data.formatValue(row[data.dataKey]) : row[data.dataKey]
+  }
+  return null
 }
 
 export default TableLayout
