@@ -21,16 +21,20 @@ interface CellParams {
   className?: string
 }
 
+type HeadCellParams = { [key: string]: any }
+
 interface TableLayoutProps extends TableProps {
   className?: string
   columns: CellParams[]
   rows: { [key: string]: any }[]
+  headCellProps?: HeadCellParams
 }
 
 function TableLayout({
   className,
   columns,
   rows,
+  headCellProps,
   ...props
 }: TableLayoutProps) {
   const styles = getStyles('table')
@@ -47,13 +51,13 @@ function TableLayout({
             data-ui="head-cell"
             key={ cellIndex }
           >
-            { renderHeadCell(cell) }
+            { renderCell(cell, null, headCellProps) }
           </Table.Cell>
         ))
         }
       </Table.Row>
     )
-  }, [columns])
+  }, [columns, headCellProps])
 
   const layout = React.useMemo(() => {
     return (
@@ -91,16 +95,24 @@ function TableLayout({
   )
 }
 
-function renderHeadCell(data: CellParams) {
-  if (data.head) return <data.head params={ data } />
-  if (data.title) return data.title
-  return null
-}
-
-function renderCell(data: CellParams, row: TableLayoutProps['rows'][0]) {
-  if (data.component) return <data.component data={ row } params={ data } />
-  if (data.dataKey) {
-    return data.formatValue ? data.formatValue(row[data.dataKey]) : row[data.dataKey]
+function renderCell(
+  data: CellParams,
+  row: TableLayoutProps['rows'][0] | null,
+  headCellProps: HeadCellParams = {}
+) {
+  if (row) {
+    if (data.component) {
+      return <data.component data={ row } params={ data } />
+    }
+    if (data.dataKey) {
+      return data.formatValue
+        ? data.formatValue(row[data.dataKey])
+        : row[data.dataKey]
+    }
+  }
+  else {
+    if (data.head) return <data.head params={ data } { ...headCellProps } />
+    if (data.title) return data.title
   }
   return null
 }
