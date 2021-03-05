@@ -21,13 +21,14 @@ interface CellParams {
   className?: string
 }
 
-type HeadCellParams = { [key: string]: any }
+type AnyProps = { [key: string]: any }
 
 interface TableLayoutProps extends TableProps {
   className?: string
   columns: CellParams[]
   rows: { [key: string]: any }[]
-  headCellProps?: HeadCellParams
+  headCellProps?: AnyProps
+  dataRowProps?: AnyProps
 }
 
 function TableLayout({
@@ -35,36 +36,37 @@ function TableLayout({
   columns,
   rows,
   headCellProps,
+  dataRowProps,
   ...props
 }: TableLayoutProps) {
   const styles = getStyles('table')
-  const headRow = React.useMemo(() => {
-    return (
-      <Table.Row
-        className={ styles.uiTableHead }
-        data-ui="head"
-      >
-        { columns.map((cell, cellIndex) => (
-          <Table.Cell
-            className={ join(styles.uiTableHeadCell, cell.className) }
-            width={ cell.width }
-            data-ui="head-cell"
-            key={ cellIndex }
-          >
-            { renderCell(cell, null, headCellProps) }
-          </Table.Cell>
-        ))
-        }
-      </Table.Row>
-    )
-  }, [columns, headCellProps])
+  const headRow = React.useMemo(() => (
+    <Table.Row
+      className={ styles.uiTableHead }
+      data-ui="head"
+    >
+      { columns.map((cell, cellIndex) => (
+        <Table.Cell
+          className={ join(styles.uiTableHeadCell, cell.className) }
+          width={ cell.width }
+          data-ui="head-cell"
+          key={ cellIndex }
+        >
+          { renderCell(cell, null, headCellProps) }
+        </Table.Cell>
+      ))
+      }
+    </Table.Row>
+  ), [columns, headCellProps])
 
   const layout = React.useMemo(() => {
+    const onClick = dataRowProps && dataRowProps.onClick ? dataRowProps.onClick : undefined
     return (
       rows.map((row, rowIndex) => (
         <Table.Row
           className={ styles.uiTableDataRow }
           data-ui="row"
+          onClick={ onClick ? () => onClick(row, rowIndex) : undefined }
           key={ rowIndex }
         >
           { columns.map((col, colIndex) => (
@@ -98,7 +100,7 @@ function TableLayout({
 function renderCell(
   data: CellParams,
   row: TableLayoutProps['rows'][0] | null,
-  headCellProps: HeadCellParams = {}
+  headCellProps: AnyProps = {}
 ) {
   if (row) {
     if (data.component) {
