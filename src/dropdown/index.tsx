@@ -10,13 +10,14 @@ function isFunction(value: any): value is Function {
   return typeof value === 'function'
 }
 
-export interface ChildProps extends React.DOMAttributes<HTMLDivElement> {
+export interface DropdownChildProps {
   isOpen: boolean
   open: Fn
   close: Fn
+  onClick: React.HTMLAttributes<any>['onClick']
 }
 
-function handleChild(value: any, props?: ChildProps) {
+function handleChild(value: any, props?: DropdownChildProps) {
   return isFunction(value)
     ? value(props)
     : React.cloneElement(value, props)
@@ -66,6 +67,7 @@ const Dropdown = React.forwardRef(function Dropdown({
         isOpen: open,
         open: onOpen,
         close: onClose,
+        onClick: () => setOpen((x) => !x),
       })
       handler.current = listen(document, 'click', handleClickOutside)
     }
