@@ -3,7 +3,10 @@ import Text, { TextProps } from '../text'
 import join from '../utils/join'
 import CONFIG from '../config'
 
-export interface MenuTextProps extends TextProps {}
+export interface MenuTextProps extends
+  TextProps,
+  Omit<React.HTMLAttributes<HTMLDivElement>, 'color'>
+{}
 
 const MenuText = React.forwardRef(function MenuText({
   className,

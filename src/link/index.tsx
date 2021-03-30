@@ -4,7 +4,7 @@ import Text, { TextProps } from '../text'
 import join from '../utils/join'
 import { getStyles } from '../config'
 
-export interface LinkProps extends TextProps {
+export interface LinkProps extends TextProps, Omit<React.AnchorHTMLAttributes<HTMLLinkElement>, 'color'> {
   to?: RouterLinkProps['to']
 }
 

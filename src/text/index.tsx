@@ -3,16 +3,19 @@ import join from '../utils/join'
 import { getStyles } from '../config'
 import { ColorType } from '../types'
 
-export interface TextProps
-  extends Omit<React.HTMLAttributes<HTMLElement>, 'color'> {
+export interface TextProps {
   variant?: string
   size?: string | number
   weight?: string | number
   color?: ColorType
   align?: 'center' | 'right'
-  href?: string
   as?: string | React.FunctionComponent<any>
 }
+
+export interface TextComponentProps extends
+  TextProps,
+  Omit<React.HTMLAttributes<HTMLElement>, 'color'>
+{}
 
 const Text = React.forwardRef(function Text({
   className,
@@ -23,7 +26,7 @@ const Text = React.forwardRef(function Text({
   align,
   as = 'p',
   ...props
-}: TextProps, ref: any) {
+}: TextComponentProps, ref: any) {
   const styles = getStyles('text')
   const Tag = as as any
   const classlist = React.useMemo(() => join(
