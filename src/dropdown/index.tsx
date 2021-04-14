@@ -2,7 +2,7 @@ import * as React from 'react'
 import join from '../utils/join'
 import isInside from '../utils/is-inside'
 import listen from '../utils/listen'
-import useMergedRefs from '../utils/use-merged-refs'
+import mergeRefs from '../utils/merge-refs'
 import { getStyles } from '../config'
 import { Fn } from '../types'
 
@@ -41,13 +41,12 @@ const Dropdown = React.forwardRef(function Dropdown({
   const [open, setOpen] = React.useState(false)
 
   const containerRef = React.useRef(null)
-  const mergedRef = useMergedRefs<HTMLDivElement>(ref, containerRef)
   const onOpen = () => setOpen(true)
   const onClose = () => setOpen(false)
 
   const handleClickOutside = React.useCallback((e) => {
-    if (!mergedRef.current) return
-    if (!isInside(e.target, mergedRef.current)) {
+    if (!containerRef.current) return
+    if (!isInside(e.target, containerRef.current)) {
       onClose()
     }
   }, [])
@@ -92,7 +91,7 @@ const Dropdown = React.forwardRef(function Dropdown({
       onMouseEnter={ showOnHover ? onOpen : props.onMouseEnter }
       onMouseLeave={ showOnHover ? onClose : props.onMouseLeave }
       { ...props }
-      ref={ mergedRef }
+      ref={ mergeRefs(ref, containerRef) }
     >
       { trigger }
       { dropdown }

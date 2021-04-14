@@ -1,6 +1,6 @@
 import * as React from 'react'
-import useMergedRefs from '../utils/use-merged-refs'
 import join from '../utils/join'
+import mergeRefs from '../utils/merge-refs'
 import { getStyles } from '../config'
 
 export interface FileProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value'> {
@@ -20,12 +20,11 @@ const File = React.forwardRef(function File({
 }: FileProps, ref) {
   const styles = getStyles('file')
 
-  const input = React.useRef()
-  const mergedRef = useMergedRefs<HTMLInputElement | null>(ref, input)
+  const inputRef = React.useRef()
 
   React.useEffect(() => {
-    if (!mergedRef.current) return
-    if (!value) resetInputFiles(mergedRef.current)
+    if (!inputRef.current) return
+    if (!value) resetInputFiles(inputRef.current!)
   }, [value])
 
   return (
@@ -35,7 +34,7 @@ const File = React.forwardRef(function File({
           className={ styles.uiFileInput }
           { ...props }
           type="file"
-          ref={ mergedRef }
+          ref={ mergeRefs(ref, inputRef) }
         />
         <span className={ styles.uiFileText }>
           { children }
